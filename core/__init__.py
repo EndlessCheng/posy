@@ -57,11 +57,32 @@ def play_start_sound():
     start_sound.play()
 
 
+def play_shutdown_animation():
+    DISPLAY_SURF.fill(COLOR_BLACK)
+
+    frame = 8
+    step = SCREEN_WIDTH / (2 * frame)
+    for i in range(frame + 1):
+        h = i // 4 + 1
+        pygame.draw.rect(DISPLAY_SURF, COLOR_BLACK,
+                         (0, (SCREEN_HEIGHT - h) // 2, SCREEN_WIDTH, h))
+        pygame.draw.rect(DISPLAY_SURF, COLOR_WHITE,
+                         (step * i, (SCREEN_HEIGHT - h) // 2, SCREEN_WIDTH - 2 * step * i, h))
+        pygame.display.update()
+        TIMER.tick(60)
+
+
+def shutdown():
+    play_shutdown_animation()
+
+    pygame.quit()
+    sys.exit()
+
+
 def handle_event(event):
     etype = event.type
     if etype == QUIT:
-        pygame.quit()
-        sys.exit()
+        shutdown()
 
 
 def main():
@@ -73,6 +94,7 @@ def main():
     while True:
         for event in pygame.event.get():
             handle_event(event)  # 处理相关中断
+
         pygame.display.update()
 
 
