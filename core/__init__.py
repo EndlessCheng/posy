@@ -1,3 +1,4 @@
+import os
 import sys
 
 import pygame
@@ -50,6 +51,13 @@ def init_desktop():
     pygame.display.update()
 
 
+def play_start_sound():
+    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    start_sound_path = os.path.join(base_dir, 'res', 'start.wav')
+    start_sound = pygame.mixer.Sound(start_sound_path)
+    start_sound.play()
+
+
 def handle_event(event):
     etype = event.type
     if etype == QUIT:
@@ -61,6 +69,7 @@ def main():
     pygame.display.set_caption(OS_NAME)
 
     init_desktop()
+    play_start_sound()
 
     while True:
         for event in pygame.event.get():
