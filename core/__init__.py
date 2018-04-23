@@ -1,8 +1,9 @@
-import os
 import sys
 
 import pygame
 from pygame.locals import *
+
+from utils import get_res_file_path
 
 pygame.init()
 
@@ -52,9 +53,7 @@ def init_desktop():
 
 
 def play_start_sound():
-    base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    start_sound_path = os.path.join(base_dir, 'res', 'start.wav')
-    start_sound = pygame.mixer.Sound(start_sound_path)
+    start_sound = pygame.mixer.Sound(get_res_file_path('start.wav'))
     start_sound.play()
 
 
